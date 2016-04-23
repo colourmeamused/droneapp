@@ -8,6 +8,7 @@ function getLocation() {
 }
 var myposition;
 function showPosition(position) {
+  x = document.getElementById("demo");
     x.innerHTML = "Latitude: " + position.coords.latitude +
     "<br>Longitude: " + position.coords.longitude;
 var marker = new google.maps.Marker({
