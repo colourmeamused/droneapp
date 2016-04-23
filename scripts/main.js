@@ -21,11 +21,11 @@ var marker = new google.maps.Marker({
 
         var UTS = new google.maps.LatLng(-33.88623496679706, 151.1795997619629);
 
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           center: UTS,
           zoom: 16,
           scaleControl: true
-        });        
+        });
                 var lon1 = -33.886395283702115;
                 var lon2 = -33.89157870127412;
                 var lan2 = 151.19090795516968;
@@ -49,7 +49,6 @@ var marker = new google.maps.Marker({
 
                 var nextLon, nextLan;
 
-                var rectangle = new google.maps.Rectangle();
 
                 while(currentLon > lon2) {
                   currentLan = lan1;
