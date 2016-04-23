@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Showing pixel and tile coordinates</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCIjTaj935xJY-yEKXNT4r98SHVQErxSY">
+    </script>
+    <script type="text/javascript" src="scripts/main.js"> </script>
+    <p>Click the button to   initialize map.</p>
+    <button onclick="initMap()">Initialize Map</button>
+<p>Click the button to get your coordinates.</p>
+<button onclick="getLocation()">Try It</button>
+<p id="demo"></p>
+
+    <div id="map"></div>
+
+  </body>
+</html>

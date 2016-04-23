@@ -1,28 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Showing pixel and tile coordinates</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <script>
+var x = document.getElementById("demo");
+var map;
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+    }
+}
+var myposition;
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+    map: map,
+    title: 'Hello World!'
+  });
+}
       function initMap() {
 
         var UTS = new google.maps.LatLng(-33.88623496679706, 151.1795997619629);
 
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           center: UTS,
           zoom: 16,
           scaleControl: true
@@ -53,7 +51,6 @@
      west: west
    }
  });
-
 
         Meters_per_pixel = 156543.03392 * Math.cos(UTS.lat() * Math.PI / 180)
          / Math.pow(2, map.getZoom());
@@ -117,9 +114,3 @@
             TILE_SIZE * (0.5 + latLng.lng() / 360),
             TILE_SIZE * (0.5 - Math.log((1 + siny) / (1 - siny)) / (4 * Math.PI)));
       }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCIjTaj935xJY-yEKXNT4r98SHVQErxSY&callback=initMap">
-    </script>
-  </body>
-</html>
