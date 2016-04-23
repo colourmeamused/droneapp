@@ -28,6 +28,33 @@
           scaleControl: true
 
         });
+        var north = -33.88646653556321;
+        var south = -33.89138277025567;
+        var east = 151.19075775146484;
+        var west = 151.18037223815918;
+        Meters_per_pixel = 156543.03392 * Math.cos(UTS.lat() * Math.PI / 180)
+         / Math.pow(2, map.getZoom());
+
+
+
+
+
+        var rectangle = new google.maps.Rectangle({
+   strokeColor: '#FF0000',
+   strokeOpacity: 0.8,
+   strokeWeight: 2,
+   fillColor: '#FF0000',
+   fillOpacity: 0.2,
+   map: map,
+   bounds: {
+     north: north,
+     south: south,
+     east: east,
+     west: west
+   }
+ });
+
+
         Meters_per_pixel = 156543.03392 * Math.cos(UTS.lat() * Math.PI / 180)
          / Math.pow(2, map.getZoom());
          console.log("mpp = "+Meters_per_pixel);
