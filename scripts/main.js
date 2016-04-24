@@ -38,6 +38,7 @@ function initMap() {
     zoom: 16,
     scaleControl: true,
             mapTypeId: google.maps.MapTypeId.SATELLITE,
+            disableDoubleClickZoom: true
 
   });
   var lon1 = -33.886395283702115;
