@@ -33,7 +33,12 @@ function Zone(id, lon1, lan1, lon2, lan2, color, rectangle) {
 
 function initMap() {
 
-  var UTS = new google.maps.LatLng(-33.88623496679706, 151.1795997619629);
+  var lon1 = -33.886395283702115;
+  var lon2 = -33.89157870127412;
+  var lan2 = 151.19090795516968;
+  var lan1 = 151.18037223815918;
+
+  var UTS = new google.maps.LatLng(lon2, lan2);
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: UTS,
@@ -42,10 +47,7 @@ function initMap() {
             mapTypeId: google.maps.MapTypeId.SATELLITE,
 
   });
-  var lon1 = -33.886395283702115;
-  var lon2 = -33.89157870127412;
-  var lan2 = 151.19090795516968;
-  var lan1 = 151.18037223815918;
+
 
   var px1 = 15434124;
   var py1 = 10068865;
@@ -137,19 +139,28 @@ function initMap() {
     }
 
   }
+
+myZone = allZones[13];
+
     var clientZones = [myZone.id];
-  for (var i=0; i<allZones.length; i++) { 
-    if(!clientZones.includes(i, 0)){ 
+  for (var i=0; i<allZones.length; i++) {
+    if(!clientZones.includes(i, 0)){
 if (allZones[i].rectangle.strokeColor != 'red' && allZones[i].rectangle.strokeColor != 'orange') {
       allZones[i].rectangle.setMap(null) ;
       }
-} 
-      else { 
-        allZones[i].rectangle.setOptions({ 
-          fillColor: 'yellow' 
-        }); 
-      } 
+}
+      else {
+        allZones[i].rectangle.setOptions({
+          fillColor: 'yellow'
+        });
+
+        var userZone = new google.maps.LatLng(myZone.lon2, myZone.lan2);
+            map.setCenter(userZone);
+            map.setZoom(18);
+      }
     }
+
+
 
   function someAction() {
     if(this.fillColor == '#FF4C4C') {
