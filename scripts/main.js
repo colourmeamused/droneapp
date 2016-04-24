@@ -1,6 +1,7 @@
 var x = document.getElementById("demo");
 var map;
 var user;
+var allZones = [];
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -65,7 +66,6 @@ function initMap() {
   var nextLon, nextLan;
 
 
-  var allZones = [];
   while (currentLon > lon2) {
     currentLan = lan1;
     nextLon = Math.max(lon2, currentLon - lonPerZone);
@@ -117,7 +117,26 @@ function initMap() {
         fillColor: 'green'
       })
     }
-  }
+    var arrayLength = allZones.length;
+    for (var i = 0; i < arrayLength; i++) {
+
+
+    $.post({
+
+    type:"POST",
+      url:"elastic/allzones/"+i,
+      data:{"color":allZones[i].color},
+      dataType:"JSON",
+
+crossDomain:true,
+
+      success:function(data, status){
+              alert("Data: " + data + "\nStatus: " + status);
+          }
+        })
+      }
+}
+
 
 
 
