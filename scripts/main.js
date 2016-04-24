@@ -121,19 +121,14 @@ function initMap() {
     for (var i = 0; i < arrayLength; i++) {
 
 
-    $.ajax({
+    $.post("/elastic/allzones/"+i,
+      {"color":allZones[i].color},
 
-    type:"POST",
-      URL:"/elastic/allzones/"+i,
-      data:{"color":allZones[i].color},
-      dataType:"JSON",
 
-crossDomain:true,
-
-      success:function(data, status){
+function(data, status){
               alert("Data: " + data + "\nStatus: " + status);
           }
-        })
+        )
       }
 }
 
