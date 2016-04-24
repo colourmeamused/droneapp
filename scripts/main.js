@@ -2,6 +2,7 @@ var x = document.getElementById("demo");
 var map;
 var user;
 var allZones = [];
+
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -66,6 +67,7 @@ function initMap() {
   var nextLon, nextLan;
 
 
+  var allZones = [];
   while (currentLon > lon2) {
     currentLan = lan1;
     nextLon = Math.max(lon2, currentLon - lonPerZone);
@@ -75,7 +77,8 @@ function initMap() {
       //DB
 
       var rectangle = new google.maps.Rectangle();
-      allZones.push(new Zone(zoneNumber, currentLon, currentLan, nextLon, nextLan, 'red', rectangle));
+
+            allZones.push(new Zone(zoneNumber, currentLon, currentLan, nextLon, nextLan, '#FF4C4C', rectangle));
 
       zoneNumber++;
       currentLan = nextLan;
@@ -85,9 +88,10 @@ function initMap() {
 
   for(var i=0; i<allZones.length; i++) {
     allZones[i].rectangle.setOptions({
-      strokeColor: 'red',
+            strokeColor: '#E5E5E5',
       strokeOpacity: 0.8,
       strokeWeight: 1,
+      strokePosition: google.maps.StrokePosition.INSIDE,
       fillColor: allZones[i].color,
       fillOpacity: 0.4,
       map: map,
@@ -98,54 +102,80 @@ function initMap() {
         west: allZones[i].lan1,
       },
       positionNumber: allZones[i].id,
-      editable: true,
-      draggable: true,
+      // editable: true,
+      // draggable: true,
     });
 
     allZones[i].rectangle.addListener('click', someAction);
 
+
+
+
+
   }
 
-  function someAction() {
 
-    if(this.fillColor == 'red') {
+  var noFlyZone = [0, 1, 2, 5];
+
+  var badWeatherZone = [16, 17, 21, 22];
+
+
+  for (var i=0; i<allZones.length; i++) {
+    if(noFlyZone.includes(i, 0)){
+      allZones[i].rectangle.setOptions({
+        strokeColor: 'red',
+        strokeWeight: 10,
+
+      })
+    }
+
+    if(badWeatherZone.includes(i, 0)){
+      allZones[i].rectangle.setOptions({
+        strokeColor: 'orange',
+        strokeWeight: 10,
+
+      })
+    }
+
+  }
+  function someAction() {
+    if(this.fillColor == '#FF4C4C') {
       this.setOptions({
-        fillColor: 'yellow'
+        fillColor: 'yellow',
+
       })
     } else if(this.fillColor == 'yellow') {
       this.setOptions({
-        fillColor: 'green'
+        fillColor: 'green',
+
       })
     }
     var arrayLength = allZones.length;
 
-      for (var i = 0; i < arrayLength; i++) {
-    if(allZones[i].rectangle.fillColor == 'yellow') {
+  for (var i = 0; i < arrayLength; i++) {
+if(allZones[i].rectangle.fillColor == 'yellow') {
 
-      var clone=$.extend({},false,allZones[i]);
+  var clone=$.extend({},false,allZones[i]);
 clone.color=clone.rectangle.fillColor;
-      clone.rectangle=null;
+  clone.rectangle=null;
 console.log(clone);
-      $.ajax({
+  $.ajax({
 
-      type: "POST",
+  type: "POST",
 
-      url: "/elastic/allzones/zone/"+i,
+  url: "/elastic/allzones/zone/"+i,
 
-      data:  JSON.stringify(clone),
-      success: function(data, status){
-                    console.log("Data: " + data + "\nStatus: " + status);
-                },
+  data:  JSON.stringify(clone),
+  success: function(data, status){
+                console.log("Data: " + data + "\nStatus: " + status);
+            },
 
-      dataType: "json"
+  dataType: "json"
 
-      });
-      }
-    }
-
-
+  });
+  }
 }
-
+  }
 
 
 
