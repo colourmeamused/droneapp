@@ -5,7 +5,6 @@ setUser = function(userid) {
    user = userid;
 $( "#pilot").html(userid);
   for(i=0; i<30; i++) {
-console.log("III "+i);
       $.ajax({
 
       type: "GET",
@@ -13,7 +12,6 @@ console.log("III "+i);
       url: "/elastic/allzones/zone/"+i,
 
       success: function(data, status){
-console.log(data);
 if (data._source.color=="yellow") {
                     myZone=data._source;
 myZone.color="blue";
@@ -22,11 +20,10 @@ console.log("MY ZONNE IS "+data._id);
 
   type: "POST",
 
-  url: "/elastic/allzones/zone/"+i,
+  url: "/elastic/allzones/zone/"+data._id,
 
   data:  JSON.stringify(myZone),
   success: function(data, status){
-                console.log("Data: " + data + "\nStatus: " + status);
             },
 
   dataType: "json"
@@ -36,7 +33,6 @@ console.log("MY ZONNE IS "+data._id);
       }
 }
 });
-if (myZone != null ) return false;
 }
 
 
