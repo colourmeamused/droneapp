@@ -2,8 +2,11 @@ var setUser;
 var myZone=null;
 var i=0;
 setUser = function(userid) {
+if (user != null ) return 0;
    user = userid;
 $( "#pilot").html(userid);
+if (userid == "operator") return 0;
+
   for(i=0; i<30; i++) {
       $.ajax({
 

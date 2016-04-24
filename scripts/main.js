@@ -140,7 +140,8 @@ function initMap() {
 
   }
 
-myZone = allZones[13];
+//test code
+//myZone = allZones[13];
 
     var clientZones = [myZone.id];
   for (var i=0; i<allZones.length; i++) {
