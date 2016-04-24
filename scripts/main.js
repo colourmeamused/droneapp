@@ -121,7 +121,7 @@ function initMap() {
     for (var i = 0; i < arrayLength; i++) {
 
 
-    $.post("/elastic/allzones/"+i,
+    $.post("/elastic/allzones/1",
       {"color":allZones[i].color},
 
 
