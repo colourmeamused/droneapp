@@ -40,7 +40,6 @@ function initMap() {
     zoom: 16,
     scaleControl: true,
             mapTypeId: google.maps.MapTypeId.SATELLITE,
-            disableDoubleClickZoom: true
 
   });
   var lon1 = -33.886395283702115;
@@ -60,7 +59,7 @@ function initMap() {
   var lanPerZone = (xSize / Meters_per_pixel) * Math.abs((lan2 - lan1) / (px2 - px1));
   var lonPerZone = (ySize / Meters_per_pixel) * Math.abs((lon2 - lon1) / (py2 - py1));
 
-  var zoneNumber = 1;
+  var zoneNumber = 0;
   var currentLan = lan1;
   var currentLon = lon1;
 
@@ -138,6 +137,20 @@ function initMap() {
     }
 
   }
+    var clientZones = [myZone.id];
+  for (var i=0; i<allZones.length; i++) { 
+    if(!clientZones.includes(i, 0)){ 
+if (allZones[i].rectangle.strokeColor != 'red' && allZones[i].rectangle.strokeColor != 'orange') {
+      allZones[i].rectangle.setMap(null) ;
+      }
+} 
+      else { 
+        allZones[i].rectangle.setOptions({ 
+          fillColor: 'yellow' 
+        }); 
+      } 
+    }
+
   function someAction() {
     if(this.fillColor == '#FF4C4C') {
       this.setOptions({
@@ -208,6 +221,7 @@ console.log(clone);
 var TILE_SIZE = 256;
 
 function createInfoWindowContent(latLng, zoom) {
+  return 0;
   var scale = 1 << zoom;
 
   var worldCoordinate = project(latLng);
