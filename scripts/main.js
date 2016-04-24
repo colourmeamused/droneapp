@@ -119,9 +119,13 @@ function initMap() {
     }
     var arrayLength = allZones.length;
 
-    for (var i = 0; i < arrayLength; i++) {
-      var clone=allZones[i];
+      for (var i = 0; i < arrayLength; i++) {
+    if(allZones[i].rectangle.fillColor == 'yellow') {
+
+      var clone=$.extend({},false,allZones[i]);
+clone.color=clone.rectangle.fillColor;
       clone.rectangle=null;
+console.log(clone);
       $.ajax({
 
       type: "POST",
@@ -130,15 +134,16 @@ function initMap() {
 
       data:  JSON.stringify(clone),
       success: function(data, status){
-                    alert("Data: " + data + "\nStatus: " + status);
+                    console.log("Data: " + data + "\nStatus: " + status);
                 },
 
       dataType: "json"
 
       });
-
-
       }
+    }
+
+
 }
 
 
