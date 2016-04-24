@@ -121,7 +121,7 @@ function initMap() {
     for (var i = 0; i < arrayLength; i++) {
 
 
-    $.post({
+    $.ajax({
 
     type:"POST",
       URL:"/elastic/allzones/"+i,
