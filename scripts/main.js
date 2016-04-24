@@ -119,16 +119,23 @@ function initMap() {
     }
     var arrayLength = allZones.length;
     for (var i = 0; i < arrayLength; i++) {
+      $.ajax({
+
+      type: "PUT",
+
+      url: "/elastic/allzones/1",
+
+      data:   {"color":allZones[i].color},
+
+      success: function(data, status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                },
+
+      dataType: "JSON"
+
+      });
 
 
-    $.post("/elastic/allzones/1",
-      {"color":allZones[i].color},
-
-
-function(data, status){
-              alert("Data: " + data + "\nStatus: " + status);
-          }
-        )
       }
 }
 
