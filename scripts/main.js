@@ -124,7 +124,7 @@ function initMap() {
     $.post({
 
     type:"POST",
-      url:"elastic/allzones/"+i,
+      url:"/elastic/allzones/"+i,
       data:{"color":allZones[i].color},
       dataType:"JSON",
 
