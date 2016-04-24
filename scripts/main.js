@@ -1,3 +1,4 @@
+var user;
 var x = document.getElementById("demo");
 var map;
 function getLocation() {
@@ -24,6 +25,8 @@ var marker = new google.maps.Marker({
         map = new google.maps.Map(document.getElementById('map'), {
           center: UTS,
           zoom: 16,
+          mapTypeId: google.maps.MapTypeId.SATELLITE,
+
           scaleControl: true
         });
                 var lon1 = -33.886395283702115;
