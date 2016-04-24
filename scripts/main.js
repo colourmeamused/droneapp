@@ -118,20 +118,22 @@ function initMap() {
       })
     }
     var arrayLength = allZones.length;
+
     for (var i = 0; i < arrayLength; i++) {
+      var clone=allZones[i];
+      clone.rectangle=null;
       $.ajax({
 
-      type: "PUT",
+      type: "POST",
 
-      url: "/elastic/allzones/1",
+      url: "/elastic/allzones/zone/"+i,
 
-      data:   {"color":allZones[i].color},
-
+      data:  JSON.stringify(clone),
       success: function(data, status){
                     alert("Data: " + data + "\nStatus: " + status);
                 },
 
-      dataType: "JSON"
+      dataType: "json"
 
       });
 
