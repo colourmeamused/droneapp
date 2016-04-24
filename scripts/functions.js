@@ -1,9 +1,11 @@
 var setUser;
 var myZone=null;
+var i=0;
 setUser = function(userid) {
    user = userid;
 $( "#pilot").html(userid);
-  for(var i=0; i<30; i++) {
+  for(i=0; i<30; i++) {
+console.log("III "+i);
       $.ajax({
 
       type: "GET",
@@ -11,15 +13,11 @@ $( "#pilot").html(userid);
       url: "/elastic/allzones/zone/"+i,
 
       success: function(data, status){
-                    console.log("Data: " + data + "\nStatus: " + status);
+console.log(data);
 if (data._source.color=="yellow") {
                     myZone=data._source;
-            }
-      }
-      });
-if (myZone!=null && myZone.color=="yellow") {
 myZone.color="blue";
-console.log("MY ZONNE IS "+i);
+console.log("MY ZONNE IS "+data._id);
   $.ajax({
 
   type: "POST",
@@ -34,8 +32,12 @@ console.log("MY ZONNE IS "+i);
   dataType: "json"
 
   });
+
+      }
+}
+});
+if (myZone != null ) return false;
 }
 
 
-}
 };
