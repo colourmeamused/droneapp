@@ -153,7 +153,6 @@ function initMap() {
     var arrayLength = allZones.length;
 
   for (var i = 0; i < arrayLength; i++) {
-if(allZones[i].rectangle.fillColor == 'yellow') {
 
   var clone=$.extend({},false,allZones[i]);
 clone.color=clone.rectangle.fillColor;
@@ -174,7 +173,7 @@ console.log(clone);
 
   });
   }
-}
+
   }
 
 
